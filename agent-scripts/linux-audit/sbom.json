@@ -1,0 +1,64 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "name": "linux-audit",
+      "version": "0.1.0",
+      "description": "Read-only system audit script for dispatcher agents"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "bash",
+      "version": "5.2",
+      "description": "GNU Bourne Again shell",
+      "purl": "pkg:deb/debian/bash"
+    },
+    {
+      "type": "library",
+      "name": "util-linux",
+      "version": "2.38",
+      "description": "Provides last(1) for login history",
+      "purl": "pkg:deb/debian/util-linux"
+    },
+    {
+      "type": "library",
+      "name": "iproute2",
+      "version": "6.1",
+      "description": "Provides ss(8) for port listing",
+      "purl": "pkg:deb/debian/iproute2"
+    },
+    {
+      "type": "library",
+      "name": "systemd",
+      "version": "252",
+      "description": "Provides systemctl(1) and journalctl(1)",
+      "purl": "pkg:deb/debian/systemd"
+    },
+    {
+      "type": "library",
+      "name": "coreutils",
+      "version": "9.1",
+      "description": "Provides df(1)",
+      "purl": "pkg:deb/debian/coreutils"
+    },
+    {
+      "type": "library",
+      "name": "procps",
+      "version": "2:4.0",
+      "description": "Provides free(1)",
+      "purl": "pkg:deb/debian/procps"
+    },
+    {
+      "type": "library",
+      "name": "lsof",
+      "version": "4.95",
+      "description": "Provides lsof(8) for open file reporting",
+      "purl": "pkg:deb/debian/lsof"
+    }
+  ]
+}
