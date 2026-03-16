@@ -1,5 +1,5 @@
 ---
-title: dispatcher-plugins - Contributing
+title: exec-plugins - Contributing
 subtitle: Requirements, structure, and validation for plugin submissions
 brand: odcc
 ---
@@ -151,7 +151,7 @@ Hooks receive full request context as environment variables and as JSON on
 stdin. Read `auth/README.md` for the full variable and field reference.
 
 Hooks must handle malformed or empty stdin without crashing - exit 1 (denied)
-on any unhandled error. This is a hard requirement: the dispatcher treats a
+on any unhandled error. This is a hard requirement: ctrl-exec treats a
 crash the same as a denial, but a hook that produces unexpected output or
 leaves background processes running creates operational problems.
 
@@ -159,7 +159,7 @@ Exit codes must be exactly 0, 1, 2, or 3. No output on stdout or stderr.
 
 ### ctrl-exec-cli
 
-Manager plugins consume the dispatcher HTTP API. Do not hardcode hostnames
+Manager plugins consume the ctrl-exec HTTP API. Do not hardcode hostnames
 or script names - use `GET /openapi-live.json` or `GET /discovery` for
 runtime enumeration.
 

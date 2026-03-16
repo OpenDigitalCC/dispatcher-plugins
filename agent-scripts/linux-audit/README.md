@@ -1,13 +1,13 @@
 ---
 title: linux-audit
-subtitle: Read-only system audit script for dispatcher agents
+subtitle: Read-only system audit script for ctrl-exec agents
 ---
 
 # linux-audit
 
 ## Purpose
 
-A read-only audit script for Linux hosts managed by dispatcher. Provides
+A read-only audit script for Linux hosts managed by ctrl-exec. Provides
 structured output across eight areas: recent logins, failed authentication
 attempts, listening ports, systemd service status, disk usage, memory and
 swap, and open file descriptor counts. Intended for scheduled compliance

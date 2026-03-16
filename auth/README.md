@@ -1,24 +1,24 @@
 ---
-title: dispatcher-plugins - auth
-subtitle: Auth hooks for dispatcher and agent hosts
+title: exec-plugins - auth
+subtitle: Auth hooks for ctrl-exec and agent hosts
 brand: odcc
 ---
 
 # auth
 
-Auth hooks for deployment on dispatcher or agent hosts. Each hook reads
+Auth hooks for deployment on ctrl-exec or agent hosts. Each hook reads
 request context from stdin as JSON and controls access by exit code,
-integrating dispatcher with external identity and credential systems.
+integrating ctrl-exec with external identity and credential systems.
 
 
 ## How auth hooks work
 
-Dispatcher has no built-in access control. All access policy is delegated
+ctrl-exec has no built-in access control. All access policy is delegated
 to an operator-supplied hook executable. The hook is called before every
 `run` and `ping` from both the CLI and the API.
 
 The hook receives request context in two forms: as environment variables,
-and as a JSON object on stdin. It exits with a code that dispatcher maps to
+and as a JSON object on stdin. It exits with a code that ctrl-exec maps to
 an authorisation decision.
 
 Exit codes:
@@ -74,13 +74,13 @@ ambiguous when args contain spaces.
 
 ## Installing a hook
 
-Place the hook executable on the dispatcher host and reference it in
+Place the hook executable on the ctrl-exec host and reference it in
 `ctrl-exec.conf`:
 
 ```bash
 sudo cp my-auth-hook /etc/ctrl-exec/auth-hook
 sudo chmod 750 /etc/ctrl-exec/auth-hook
-sudo chown root:dispatcher /etc/ctrl-exec/auth-hook
+sudo chown root:ctrl-exec /etc/ctrl-exec/auth-hook
 ```
 
 In `/etc/ctrl-exec/ctrl-exec.conf`:
@@ -102,11 +102,11 @@ The CLI picks up the change immediately on the next invocation.
 
 Agents can also run their own auth hook, configured via `auth_hook` in
 `agent.conf`. This runs after allowlist validation and receives the same
-context, including the token and username forwarded from the dispatcher.
+context, including the token and username forwarded from ctrl-exec.
 
 Agent-side hooks are useful for independent token validation in zero-trust
-or multi-dispatcher deployments, where the agent does not fully trust the
-dispatcher to have performed adequate access control.
+or multi-dispatcher deployments, where the agent does not fully trust
+ctrl-exec to have performed adequate access control.
 
 
 ## Example: static token
@@ -178,7 +178,7 @@ Fail closed
   non-zero code. The hook never exits 0 in an error path.
 
 No output
-: stdout and stderr are discarded by dispatcher. Do not attempt to
+: stdout and stderr are discarded by ctrl-exec. Do not attempt to
   communicate via output. Use syslog for audit logging.
 
 Stdin tolerance
@@ -186,7 +186,7 @@ Stdin tolerance
   defensive parsing and exit 1 on any parse failure.
 
 No external state written
-: Hooks are read-only with respect to the dispatcher's own data. Any
+: Hooks are read-only with respect to ctrl-exec's own data. Any
   external state (rate limit counters, session logs) is the hook's own
   responsibility to manage safely.
 
@@ -196,4 +196,4 @@ Token handling
   if audit logging is needed.
 
 British English in output and documentation
-: Consistent with the dispatcher project convention.
+: Consistent with the ctrl-exec project convention.

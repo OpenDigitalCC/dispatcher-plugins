@@ -1,16 +1,16 @@
 ---
-title: dispatcher-plugins - wishlist
+title: ctrl-exec-plugins - wishlist
 subtitle: Plugin concepts for future implementation
 brand: odcc
 ---
 
-# dispatcher-plugins TODO
+# ctrl-exec-plugins TODO
 
 Plugin concepts by category. Each entry is a brief summary of purpose,
 interface, and any notable implementation considerations.
 
 
-## dispatcher-manager
+## ctrl-exec-manager
 
 
 ### rapidoc
@@ -18,7 +18,7 @@ interface, and any notable implementation considerations.
 Static single-file HTML page pointing `spec-url` at `/openapi-live.json`.
 Provides a browser-based interactive interface to the API with live host and
 script enumeration. No build step; no server-side component beyond the
-dispatcher API itself. The version stamp on the live spec changes on each
+ctrl-exec API itself. The version stamp on the live spec changes on each
 generation, causing RapiDoc to treat each load as fresh.
 
 
@@ -59,7 +59,7 @@ for environments where Insomnia is the established HTTP tool.
 
 ### perl-client
 
-Perl library (`Dispatcher::Client`) providing `ping`, `run`, `status`, and
+Perl library providing `ping`, `run`, `status`, and
 `discovery` methods over HTTP using `LWP::UserAgent`. Returns plain Perl data
 structures. Intended for Perl automation scripts and agentic AI integrations.
 No CPAN dependencies beyond `libwww-perl` and `libjson-perl`, both available
@@ -121,7 +121,7 @@ Needs a clear per-subcommand privilege matrix in the README.
 ### asterisk
 
 Reload dialplan, show active channels, list SIP peers, restart service. Uses
-`asterisk -rx` commands. Requires the `dispatcher-agent` user to have
+`asterisk -rx` commands. Requires the `ctrl-exec-agent` user to have
 permission to run `asterisk -rx` - typically via a sudoers rule or membership
 of the `asterisk` group depending on the installation.
 
@@ -137,7 +137,7 @@ OpenWRT stable; Alpine-based rather than Debian. Dependency declarations in
 ### hestia
 
 List domains, users, and databases; suspend/unsuspend user; rebuild web domain
-config. Uses `v-` Hestia CLI commands. The `dispatcher-agent` user needs
+config. Uses `v-` Hestia CLI commands. The `ctrl-exec-agent` user needs
 permission to call `v-` commands, either via a sudoers rule or by being added
 to the `admin` group (with documented security implications).
 
@@ -186,12 +186,12 @@ Requires the agent user to run `fail2ban-client` via sudo. The unban subcommand
 is a write operation and should be documented as requiring explicit allowlisting.
 
 
-### dispatcher-chain
+### ctrl-exec-chain
 
-A script that, when executed by an agent, calls a second dispatcher instance
+A script that, when executed by an agent, calls a second ctrl-exec instance
 and relays the result back to the original caller. Enables topologies where
-an agent sits between two dispatcher instances for network separation, security
-zoning, or audit reasons. The chain script receives the target dispatcher URL
+an agent sits between two ctrl-exec instances for network separation, security
+zoning, or audit reasons. The chain script receives the target ctrl-exec URL
 and credentials as arguments; these must be explicitly allowlisted in
 `scripts.conf` on the intermediate agent. Significant security surface - the
 README must document trust implications carefully.
@@ -222,7 +222,7 @@ Requires `ldapsearch` or a suitable LDAP client library.
 ### oidc
 
 Validates an OIDC access token (JWT) against a configured issuer and JWKS
-endpoint. Extracts roles or groups from claims and maps to dispatcher privilege
+endpoint. Extracts roles or groups from claims and maps to ctrl-exec privilege
 levels. Requires network access to the JWKS endpoint at validation time.
 Distinct from the `jwt` plugin in that issuer discovery is performed
 dynamically.
@@ -232,7 +232,7 @@ dynamically.
 
 Validates a session cookie or bearer token against a configurable HTTP
 endpoint. The endpoint returns an authorisation decision; the hook maps the
-HTTP response code to a dispatcher exit code. Useful when dispatcher is
+HTTP response code to a ctrl-exec exit code. Useful when ctrl-exec is
 deployed behind an application that already manages sessions.
 
 
@@ -296,7 +296,7 @@ PAM configuration.
 ### rest-query
 
 Forwards the full request context JSON to a configurable HTTP endpoint and
-maps the HTTP response status to a dispatcher exit code. Allows any external
+maps the HTTP response status to a ctrl-exec exit code. Allows any external
 auth system to be integrated without writing a new hook. The endpoint contract
 is simple and documented in the plugin README, enabling straightforward
 implementation on any HTTP framework.

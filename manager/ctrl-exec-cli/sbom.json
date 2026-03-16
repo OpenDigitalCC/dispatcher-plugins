@@ -7,7 +7,7 @@
       "type": "application",
       "name": "ctrl-exec-cli-cli",
       "version": "0.1.0",
-      "description": "Perl CLI client for the dispatcher HTTP API"
+      "description": "Perl CLI client for the ctrl-exec HTTP API"
     }
   },
   "components": [

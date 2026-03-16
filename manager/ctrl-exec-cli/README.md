@@ -1,12 +1,12 @@
 ---
 title: ctrl-exec-cli cli
-subtitle: Perl CLI client for the dispatcher HTTP API
+subtitle: Perl CLI client for the ctrl-exec HTTP API
 brand: odcc
 ---
 
 # cli
 
-A monolithic Perl script providing full CLI access to the dispatcher HTTP API.
+A monolithic Perl script providing full CLI access to the ctrl-exec HTTP API.
 Covers all endpoints: health, ping, run, status, and discovery. Intended as a
 reference implementation and a portable tool for testing API functions before
 building higher-level interfaces.
@@ -16,7 +16,7 @@ packages.
 
 ## Purpose
 
-Exposes the complete dispatcher HTTP API as a command-line interface with
+Exposes the complete ctrl-exec HTTP API as a command-line interface with
 human-readable output by default and raw JSON output on request. Useful for
 scripted automation, ad-hoc operations, and as a reference for how each
 endpoint behaves before implementing a UI or integration.
@@ -34,7 +34,7 @@ additional installation on a standard Debian trixie system.
 
 ## Installation
 
-Copy the script to any location on the dispatcher host or any host with
+Copy the script to any location on the ctrl-exec host or any host with
 network access to the API port:
 
 ```bash
@@ -65,9 +65,9 @@ username = alice
 Environment variables:
 
 ```
-DISPATCHER_API_URL    API base URL (default: http://localhost:7445)
-DISPATCHER_TOKEN      Auth token
-DISPATCHER_USERNAME   Username (default: $USER)
+CTRL_EXEC_API_URL    API base URL (default: http://localhost:7445)
+CTRL_EXEC_TOKEN      Auth token
+CTRL_EXEC_USERNAME   Username (default: $USER)
 ```
 
 Global flags (override all other sources):
@@ -79,7 +79,7 @@ Global flags (override all other sources):
 --json             Raw JSON output for all commands
 ```
 
-Use `DISPATCHER_TOKEN` rather than `--token` to prevent the token value
+Use `CTRL_EXEC_TOKEN` rather than `--token` to prevent the token value
 appearing in `ps` output.
 
 ## Subcommands
@@ -203,8 +203,8 @@ ctrl-exec-cli status a1b2c3d4 --json
 ctrl-exec-cli --url http://myhost:7445 --token mytoken ping web-01
 
 # Configure via environment variables
-export DISPATCHER_API_URL=http://myhost:7445
-export DISPATCHER_TOKEN=mytoken
+export CTRL_EXEC_API_URL=http://myhost:7445
+export CTRL_EXEC_TOKEN=mytoken
 ctrl-exec-cli discovery --scripts
 ctrl-exec-cli run web-01 --script deploy
 ```

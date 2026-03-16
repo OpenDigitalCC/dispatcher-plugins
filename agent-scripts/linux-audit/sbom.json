@@ -7,7 +7,7 @@
       "type": "application",
       "name": "linux-audit",
       "version": "0.1.0",
-      "description": "Read-only system audit script for dispatcher agents"
+      "description": "Read-only system audit script for ctrl-exec agents"
     }
   },
   "components": [

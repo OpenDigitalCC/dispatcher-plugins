@@ -1,5 +1,5 @@
 #!/bin/bash
-# validate-plugin - Verify a dispatcher plugin meets contribution requirements
+# validate-plugin - Verify a ctrl-exec plugin meets contribution requirements
 #
 # Usage:
 #   tools/validate-plugin <plugin-path>

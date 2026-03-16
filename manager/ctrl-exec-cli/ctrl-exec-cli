@@ -525,7 +525,7 @@ sub die_error {
 # ---------------------------------------------------------------------------
 
 sub usage_main { return <<'END';
-ctrl-exec-cli - CLI client for the dispatcher HTTP API
+ctrl-exec-cli - CLI client for the ctrl-exec HTTP API
 
 Usage:
   ctrl-exec-cli [global options] <command> [command options] [args]

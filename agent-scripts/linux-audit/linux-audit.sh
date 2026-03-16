@@ -1,5 +1,5 @@
 #!/bin/bash
-# linux-audit - Read-only system audit script for dispatcher agents
+# linux-audit - Read-only system audit script for ctrl-exec agents
 #
 # Subcommands:
 #   logins        Recent successful logins (last)
@@ -14,12 +14,12 @@
 # Usage (on the agent host directly):
 #   linux-audit.sh <subcommand>
 #
-# Usage (via dispatcher):
+# Usage (via ctrl-exec):
 #   ced run <host> linux-audit -- <subcommand>
 
 set -euo pipefail
 
-# Discard stdin - this script does not use the dispatcher JSON context
+# Discard stdin - this script does not use the ctrl-exec JSON context
 exec 0</dev/null
 
 # --- helpers -----------------------------------------------------------------
@@ -132,7 +132,7 @@ Subcommands:
   open-files      Open file descriptor count by process
   all             Run all subcommands in sequence
 
-Via dispatcher:
+Via ctrl-exec:
   ced run <host> linux-audit -- logins
   ced run <host> linux-audit -- all
 EOF

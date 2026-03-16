@@ -1,19 +1,19 @@
 ---
-title: dispatcher-plugins - agent-scripts
-subtitle: Ready-built scripts for dispatcher agent hosts
+title: exec-plugins - agent-scripts
+subtitle: Ready-built scripts for ctrl-exec agent hosts
 brand: odcc
 ---
 
 # agent-scripts
 
-Ready-built scripts for deployment on dispatcher agent hosts. Each script is
+Ready-built scripts for deployment on ctrl-exec agent hosts. Each script is
 installed on the agent, added to the allowlist in `scripts.conf`, and then
-callable from the dispatcher control host.
+callable from the ctrl-exec control host.
 
 
 ## How agent scripts work
 
-The dispatcher runs allowlisted scripts on agents over mTLS. When a script
+ctrl-exec runs allowlisted scripts on agents over mTLS. When a script
 is invoked, the agent:
 
 1. Validates the script name against `scripts.conf`
@@ -66,35 +66,35 @@ If `script_dirs` is set in `agent.conf`, the script path must be under one
 of the approved directories or the agent will reject the entry at load time.
 
 
-## Calling a script from the dispatcher
+## Calling a script from ctrl-exec
 
 All scripts in this category use a subcommand pattern. The subcommand is
 passed as the first argument after `--`:
 
 ```bash
-dispatcher run <host> <script-name> -- <subcommand>
+ced run <host> <script-name> -- <subcommand>
 ```
 
 Arguments beyond the subcommand are passed positionally to the script:
 
 ```bash
-dispatcher run <host> <script-name> -- <subcommand> arg1 arg2
+ced run <host> <script-name> -- <subcommand> arg1 arg2
 ```
 
 To run the same script on multiple hosts in parallel:
 
 ```bash
-dispatcher run host-a host-b host-c <script-name> -- <subcommand>
+ced run host-a host-b host-c <script-name> -- <subcommand>
 ```
 
 To capture output as JSON for scripted consumption:
 
 ```bash
-dispatcher run host-a <script-name> --json -- <subcommand>
+ced run host-a <script-name> --json -- <subcommand>
 ```
 
 The request ID in the output (`req:`) matches the `REQID` field in syslog on
-both the dispatcher and the agent. Use it to correlate output with log entries:
+both ctrl-exec and the agent. Use it to correlate output with log entries:
 
 ```bash
 grep REQID=a1b2c3d4 /var/log/syslog
@@ -111,10 +111,10 @@ Subcommand pattern
 
 Exit codes
 : 0 for success, 1 for script errors, 2 for configuration or usage errors.
-  The dispatcher reports the exit code alongside stdout and stderr.
+  ctrl-exec reports the exit code alongside stdout and stderr.
 
 No interactive input
-: Scripts must not block waiting for input. The dispatcher closes stdin after
+: Scripts must not block waiting for input. ctrl-exec closes stdin after
   writing the JSON context (or immediately if the script discards it).
 
 Idempotent where possible
@@ -127,7 +127,7 @@ No hardcoded paths or credentials
   via arguments.
 
 British English in output and documentation
-: Consistent with the dispatcher project convention.
+: Consistent with the ctrl-exec project convention.
 
 
 ## File permissions on the agent host
