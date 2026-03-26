@@ -2,16 +2,16 @@
 # make-release.sh - Build and publish versioned category tarballs
 #
 # Produces three tarballs in dist/:
-#   ce-agent-plugins-<version>.tar.gz    agent-scripts category
-#   ce-auth-plugins-<version>.tar.gz     auth category
-#   ce-api-plugins-<version>.tar.gz      manager category
+#   ce-agent-plugins-<version>.tar.gz    ce-agent-plugins category
+#   ce-auth-plugins-<version>.tar.gz     ce-auth-plugins category
+#   ce-api-plugins-<version>.tar.gz      ce-api-plugins category
 #
 # Usage:
 #   ./make-release.sh [--auto] [--dry-run] [--category <n>]
 #
 #   --auto           Commit, tag, and push without prompting
 #   --dry-run        Show what would be built; no files written, no git changes
-#   --category <n>   Build only one category: agent-scripts, auth, or manager
+#   --category <n>   Build only one category: ce-agent-plugins, ce-auth-plugins, or ce-api-plugins
 #                    Single-category builds do not bump version or touch git
 #
 # Reads version from VERSION file in the repo root.
@@ -70,22 +70,22 @@ VERSION="$(tr -d '[:space:]' < "$VERSION_FILE")"
 # ---------------------------------------------------------------------------
 
 declare -A TARBALL_NAME=(
-    [agent-scripts]="ce-agent-plugins"
-    [auth]="ce-auth-plugins"
-    [manager]="ce-api-plugins"
+    [ce-agent-plugins]="ce-agent-plugins"
+    [ce-auth-plugins]="ce-auth-plugins"
+    [ce-api-plugins]="ce-api-plugins"
 )
 
 declare -A CATEGORY_DIR=(
-    [agent-scripts]="agent-scripts"
-    [auth]="auth"
-    [manager]="manager"
+    [ce-agent-plugins]="agent-scripts"
+    [ce-auth-plugins]="ce-auth-plugins"
+    [ce-api-plugins]="manager"
 )
 
-CATEGORIES=(agent-scripts auth manager)
+CATEGORIES=(ce-agent-plugins ce-auth-plugins ce-api-plugins)
 
 if [[ -n "$ONLY_CATEGORY" ]]; then
     [[ -v TARBALL_NAME[$ONLY_CATEGORY] ]] \
-        || die "Unknown category '$ONLY_CATEGORY'. Valid: agent-scripts, auth, manager"
+        || die "Unknown category '$ONLY_CATEGORY'. Valid: ce-agent-plugins, ce-auth-plugins, ce-api-plugins"
     CATEGORIES=("$ONLY_CATEGORY")
 fi
 
